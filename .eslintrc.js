@@ -15,11 +15,12 @@ module.exports = {
     jest: true,
   },
   ignorePatterns: ['.eslintrc.js'],
-  rules:          {
+  rules: {
     '@typescript-eslint/interface-name-prefix':          'off',
     '@typescript-eslint/explicit-function-return-type':  'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any':                'off',
+    '@typescript-eslint/no-empty-function':              'off',
     'semi':                                              ['error', 'never'],
     'indent':                                            ['error', 2],
     'key-spacing':                                       ['error', { 'mode': 'minimum', 'align': 'value' }],
