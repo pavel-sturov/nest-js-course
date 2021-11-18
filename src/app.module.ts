@@ -14,9 +14,7 @@ import { TopPageModule } from './top-page/top-page.module'
 
 @Module({
   imports:     [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-    }),
+    ConfigModule.forRoot(),
     TypegooseModule.forRootAsync({
       imports:    [ConfigModule],
       inject:     [ConfigService],
