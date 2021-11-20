@@ -5,5 +5,5 @@ export class AuthDto {
   login: string
 
   @IsString()
-  passwordHash: string
+  password: string
 }
