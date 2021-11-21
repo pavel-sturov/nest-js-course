@@ -8,6 +8,7 @@ import {
   Types,
 } from 'mongoose'
 import * as request from 'supertest'
+import { AuthDto } from '../dist/auth/dto/auth.dto'
 import { CreateReviewDto } from '../dist/review/dto/create-review.dto'
 import { AppModule } from '../src/app.module'
 import {
@@ -26,9 +27,15 @@ const validTestDto: CreateReviewDto = {
   productId:   validProductId,
 }
 
+const loginDto: AuthDto = {
+  login:    'a@gmail.com',
+  password: '123123',
+}
+
 describe('AppController (e2e)', () => {
   let app: INestApplication
   let createdId: string
+  let token: string
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -37,6 +44,12 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication()
     await app.init()
+
+    const { body } = await request(app.getHttpServer())
+      .post('/auth/login')
+      .send(loginDto)
+
+    token = body.access_token
   })
 
   it('/review/create (POST) - success', () => {
@@ -56,10 +69,7 @@ describe('AppController (e2e)', () => {
       .send({ ...validTestDto, rating: 0 })
       .expect(400)
       .expect(async ({ body }: request.Response) => {
-        console.log(body)
         expect(body.message[0]).toBe(INVALID_MIN_LENGTH)
-        // createdId = body._id
-        // expect(createdId).toBeDefined()
       })
   })
 
@@ -87,12 +97,14 @@ describe('AppController (e2e)', () => {
   it('/review/:id (DELETE) - success', () => {
     return request(app.getHttpServer())
       .delete(`/review/${createdId}`)
+      .set('Authorization', `Bearer ${token}`)
       .expect(200)
   })
 
   it('/review/:id (DELETE) - fail', () => {
     return request(app.getHttpServer())
       .delete(`/review/${invalidProductId}`)
+      .set('Authorization', `Bearer ${token}`)
       .expect(404, {
         statusCode: 404,
         message:    REVIEW_NOT_FOUND,

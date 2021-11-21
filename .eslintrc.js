@@ -27,7 +27,8 @@ module.exports = {
     'semi':                                              ['error', 'never'],
     'indent':                                            [
       'error', 2, {
-        'ignoredNodes': [
+        'MemberExpression': 1,
+        'ignoredNodes':     [
           'FunctionExpression > .params[decorators.length > 0]',
           'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
           'ClassBody.body > PropertyDefinition[decorators.length > 0] > .key',

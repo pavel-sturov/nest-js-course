@@ -22,7 +22,7 @@ export class ProductModel {
   price: number
 
   @prop()
-  oldPrice: number
+  oldPrice?: number
 
   @prop()
   credit: number
@@ -43,8 +43,8 @@ export class ProductModel {
   categories: string[]
 
   @prop({ type: () => [String] })
-  tags: string
+  tags: string[]
 
   @prop({ type: () => [ProductCharacteristic], _id: false })
-  characteristics: ProductCharacteristic
+  characteristics: ProductCharacteristic[]
 }
