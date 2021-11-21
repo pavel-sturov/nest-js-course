@@ -1,19 +1,18 @@
 name: Publish Docker
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to registry
+        uses: elgohr.Publish-Docker-GitHub-Action@master
+        with:
+          registry: docker.pkg.github.com
+          name: docker.pkg.github.com/pavel-sturov/nest-js-course/nestjs-docker-app
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "develop"
 on:
   push:
     branches: [ master ]
-
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-          - user: actions/checkout@master
-          - name: Publish to registry
-            uses: elgohr.Publish-Docker-GitHub-Action@master
-            wuth:
-              registry: docker.pkg.github.com
-              name: docker.pkg.github.com/pavel-sturov/nest-js-course/nestjs-docker-app
-              username: ${{ secrets.DOCKER_USERNAME }}
-              password: ${{ secrets.DOCKER_PASSWORD }}
-              tags: "develop"
