@@ -1,5 +1,9 @@
 name: Publish Docker
 
+on:
+  push:
+    branches: [ master ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,6 +17,3 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: "develop"
-on:
-  push:
-    branches: [ master ]
