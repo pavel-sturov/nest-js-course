@@ -19,11 +19,13 @@ export class FilesService {
     const res: FileElementResponse[] = []
 
     for (const file of files) {
-      const timeNow = Date.now()
+      const { originalname } = file
 
-      await writeFile(`${uploadFolder}/${timeNow}`, file.buffer)
+      const name = `${Date.now()}${originalname.slice(originalname.lastIndexOf('.'))}`
 
-      res.push({ url: `${dateFolder}/${timeNow}`, name: file.originalname })
+      await writeFile(`${uploadFolder}/${name}`, file.buffer)
+
+      res.push({ url: `${dateFolder}/${name}`, name })
     }
 
     return res
