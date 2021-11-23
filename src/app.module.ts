@@ -8,6 +8,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { getMongoConfig } from './configs/mongo.config'
+import { FilesModule } from './files/files.module'
 import { ProductModule } from './product/product.module'
 import { ReviewModule } from './review/review.module'
 import { TopPageModule } from './top-page/top-page.module'
@@ -24,6 +25,7 @@ import { TopPageModule } from './top-page/top-page.module'
     TopPageModule,
     ProductModule,
     ReviewModule,
+    FilesModule,
 
   ],
   controllers: [AppController],
