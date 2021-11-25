@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module'
 import { getMongoConfig } from './configs/mongo.config'
 import { getTelegramConfig } from './configs/telegram.config'
 import { FilesModule } from './files/files.module'
+import { HhModule } from './hh/hh.module'
 import { ProductModule } from './product/product.module'
 import { ReviewModule } from './review/review.module'
 import { SitemapModule } from './sitemap/sitemap.module'
@@ -33,6 +34,7 @@ import { TopPageModule } from './top-page/top-page.module'
       inject:     [ConfigService],
       useFactory: getTelegramConfig,
     }),
+    HhModule,
   ],
 })
 export class AppModule {
